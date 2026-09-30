@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Recommendations</title>
+</head>
+<body>
+
+<h1>Recommended Skills</h1>
+
+{% for skill in recommended_skills %}
+    <h3>{{ skill.title }}</h3>
+    <p>{{ skill.category }}</p>
+    <p>By {{ skill.user.username }}</p>
+{% empty %}
+    <p>No recommendation yet.</p>
+{% endfor %}
+
+<hr>
+
+<h1>Trending Skills</h1>
+
+{% for skill in trending_skills %}
+    <h3>{{ skill.title }}</h3>
+    <p>{{ skill.category }}</p>
+{% endfor %}
+
+</body>
+</html>

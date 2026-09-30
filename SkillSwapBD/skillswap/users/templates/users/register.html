@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Register - SkillSwap BD</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+          rel="stylesheet">
+
+    <style>
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:'Poppins', sans-serif;
+        }
+
+        body{
+            height:100vh;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            background:linear-gradient(135deg,#0f172a,#111827,#1e293b);
+            overflow:hidden;
+            position:relative;
+        }
+
+body::before{
+    content:'';
+    position:absolute;
+
+    width:500px;
+    height:500px;
+
+    background:#8b5cf6;
+
+    filter:blur(180px);
+
+    opacity:0.18;
+
+    top:-100px;
+    left:-100px;
+
+    z-index:-1;
+}
+
+body::after{
+    content:'';
+    position:absolute;
+
+    width:400px;
+    height:400px;
+
+    background:#2563eb;
+
+    filter:blur(180px);
+
+    opacity:0.18;
+
+    bottom:-100px;
+    right:-100px;
+
+    z-index:-1;
+}
+
+        .register-box{
+            width:430px;
+            padding:50px 40px;
+            background:rgba(255,255,255,0.08);
+            border:1px solid rgba(255,255,255,0.1);
+            backdrop-filter:blur(20px);
+            border-radius:30px;
+            box-shadow:0 10px 40px rgba(0,0,0,0.35);
+            color:white;
+        }
+        .register-box h1{
+            text-align:center;
+            margin-bottom:40px;
+            font-size:52px;
+            font-weight:700;
+            background:linear-gradient(90deg,#ffffff,#c084fc);
+            -webkit-background-clip:text;
+            background-clip:text;
+            -webkit-text-fill-color:transparent;
+        }
+
+        .input-box{
+            margin-bottom:25px;
+        }
+
+        .input-box input{
+            width:100%;
+            padding:18px 20px;
+            border:none;
+            outline:none;
+            border-radius:16px;
+            background:rgba(255,255,255,0.12);
+            color:white;
+            font-size:16px;
+            transition:0.3s;
+        }
+
+        .input-box input:focus{
+            border:1px solid #8b5cf6;
+            box-shadow:none;
+            background:rgba(255,255,255,0.15);
+        }
+
+        .input-box input::placeholder{
+            color:#d1d5db;
+        }
+
+        .register-btn{
+            width:100%;
+            padding:18px;
+            border:none;
+            border-radius:16px;
+            background:linear-gradient(90deg,#8b5cf6,#7c3aed);
+            color:white;
+            font-size:18px;
+            font-weight:600;
+            cursor:pointer;
+            transition:0.3s;
+
+        }
+
+        .register-btn:hover{
+            transform:translateY(-5px);
+        }
+
+        .bottom-text{
+            text-align:center;
+            margin-top:25px;
+        }
+
+        .bottom-text a{
+            color:#c084fc;
+            text-decoration:none;
+            font-weight:600;
+        }
+
+        .bottom-text a:hover{
+            text-decoration:underline;
+        }
+
+        .error{
+            background:#ef4444;
+            padding:12px;
+            border-radius:10px;
+            margin-bottom:20px;
+            text-align:center;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <div class="register-box">
+
+        <h1>Register</h1>
+
+        {% if error_message %}
+    <div class="alert alert-danger text-center" role="alert">
+        {{ error_message }}
+    </div>
+{% endif %}
+
+        <form method="POST">
+
+            {% csrf_token %}
+
+            <div class="input-box">
+
+                <input type="text"
+                       name="username"
+                       placeholder="Choose Username"
+                       required>
+
+            </div>
+
+            <div class="input-box">
+
+                <input type="password"
+                       name="password"
+                       placeholder="Create Password"
+                       required>
+
+            </div>
+
+            <button type="submit"
+                    class="register-btn">
+
+                Create Account
+
+            </button>
+
+        </form>
+
+        <div class="bottom-text">
+
+            Already have an account?
+
+            <a href="{% url 'login' %}">
+                Login Here
+            </a>
+
+        </div>
+
+    </div>
+
+</body>
+</html>

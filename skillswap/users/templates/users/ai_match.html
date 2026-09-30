@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AI Skill Match</title>
+</head>
+<body>
+
+<h1>AI Skill Matches 🤖</h1>
+
+{% for match in matched_users %}
+
+    <div style="border:1px solid gray; padding:15px; margin:10px;">
+        <h3>{{ match.title }}</h3>
+        <p>Teacher: {{ match.user.username }}</p>
+        <p>Category: {{ match.category }}</p>
+
+        <a href="/chat/{{ match.user.id }}/">
+            Chat
+        </a>
+    </div>
+
+{% empty %}
+
+    <p>No matching user found.</p>
+
+{% endfor %}
+
+</body>
+</html>

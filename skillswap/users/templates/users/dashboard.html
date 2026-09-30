@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - SkillSwap BD</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+
+        /* DARK MODE */
+
+.dark-mode{
+    background:#0f172a;
+}
+
+.dark-mode .main{
+    background:#0f172a;
+}
+
+.dark-mode .welcome h1,
+.dark-mode .card h2{
+    color:white;
+}
+
+.dark-mode .welcome p,
+.dark-mode .card p{
+    color:#cbd5e1;
+}
+
+.dark-mode .card{
+    background:#1e293b;
+}
+
+.dark-mode .search-box{
+    background:#1e293b;
+}
+
+.dark-mode .search-box input{
+    background:#1e293b;
+    color:white;
+}
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:'Poppins', sans-serif;
+        }
+
+        body{
+            display:flex;
+            background:#f4f7fc;
+        }
+
+        /* SIDEBAR */
+
+        .sidebar{
+            width:270px;
+            height:100vh;
+            background:#111827;
+            padding:40px 25px;
+            position:fixed;
+        }
+
+        .logo{
+            color:white;
+            font-size:30px;
+            font-weight:700;
+            margin-bottom:50px;
+        }
+
+        .menu a{
+            display:block;
+            color:#d1d5db;
+            text-decoration:none;
+            padding:15px;
+            border-radius:12px;
+            margin-bottom:15px;
+            transition:0.3s;
+            font-size:18px;
+            font-weight:500;
+        }
+
+        .menu a:hover{
+            background:#2563eb;
+            color:white;
+        }
+
+        /* MAIN */
+
+        .main{
+            margin-left:270px;
+            width:100%;
+            padding:40px;
+        }
+
+        .topbar{
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            margin-bottom:40px;
+        }
+
+        .welcome h1{
+            font-size:38px;
+            color:#111827;
+        }
+
+        .welcome p{
+            color:#6b7280;
+            margin-top:8px;
+        }
+
+        .profile-box{
+            display:flex;
+            align-items:center;
+        }
+
+        .profile-img{
+    width:55px;
+    height:55px;
+    border-radius:50%;
+    object-fit:cover;
+    border:3px solid #2563eb;
+}
+
+        /* CARDS */
+
+        .cards{
+            display:grid;
+            grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+            gap:25px;
+        }
+
+        .card{
+            background:white;
+            padding:30px;
+            border-radius:20px;
+            box-shadow:0 5px 20px rgba(0,0,0,0.08);
+            transition:0.4s;
+        }
+
+        .card:hover{
+            transform:translateY(-10px);
+        }
+
+        .card h2{
+            font-size:22px;
+            color:#111827;
+            margin-bottom:15px;
+        }
+
+        .card p{
+            color:#6b7280;
+            margin-bottom:25px;
+        }
+
+        .card a{
+            text-decoration:none;
+            background:#2563eb;
+            color:white;
+            padding:12px 24px;
+            border-radius:10px;
+            display:inline-block;
+            transition:0.3s;
+        }
+
+        .card a:hover{
+            background:#1d4ed8;
+        }
+
+    </style>
+
+</head>
+<body>
+
+    <!-- SIDEBAR -->
+
+    <div class="sidebar">
+
+        <div class="logo">
+            SkillSwap BD
+        </div>
+
+        <div class="menu">
+
+            <a href="/">🏠 Home</a>
+
+            <a href="/skills/">📚 Skills</a>
+
+            <a href="/add-skill/">➕ Add Skill</a>
+
+            <a href="/requests/">🤝 Requests</a>
+
+            <a href="/create-profile/">👤 Profile</a>
+
+            <a href="/logout/">🚪 Logout</a>
+
+            <a href="/sessions/">🎥 Sessions</a>
+
+            <a href="{% url 'ai_match' %}"> 🤖AI Skill Match </a>
+
+        </div>
+
+    </div>
+
+    <!-- MAIN -->
+
+    <div class="main">
+
+        <div class="topbar">
+
+            <div class="welcome">
+
+                <h1>
+                    Welcome,
+                    {{ request.user.username }}
+                </h1>
+
+                <p>
+                    Manage your skills and exchange requests
+                </p>
+
+            </div>
+
+            <!-- DARK MODE BUTTON -->
+
+<button id="darkModeBtn">
+    🌙
+</button>
+
+            <div class="profile-box">
+
+                {% if request.user.profile.profile_image %}
+
+<img 
+    src="{{ request.user.profile.profile_image.url }}" 
+    class="profile-img"
+>
+
+{% endif %}
+
+            </div>
+
+        </div>
+
+        <!-- SEARCH BAR -->
+
+<div class="search-box">
+
+    <input type="text" placeholder="Search skills...">
+
+</div>
+
+        <!-- DASHBOARD CARDS -->
+
+        <div class="card">
+    <h2>📚 My Skills</h2>
+    <p>Total Skills: {{ total_skills }}</p>
+    <a href="/add-skill/">Add Skill</a>
+</div>
+
+<div class="card">
+    <h2>📤 Sent Requests</h2>
+    <p>Total Sent: {{ sent_requests.count }}</p>
+    <a href="/requests/">View Requests</a>
+</div>
+
+<div class="card">
+    <h2>📥 Received Requests</h2>
+    <p>Total Received: {{ received_requests.count }}</p>
+    <a href="/requests/">View Requests</a>
+</div>
+
+<div class="card">
+    <h2>✅ Accepted Sessions</h2>
+    <p>Total Accepted: {{ accepted_requests.count }}</p>
+</div>
+
+       <div class="cards">
+
+    <div class="card">
+        <h2>📚 Explore Skills</h2>
+        <p>Discover amazing skills from other users.</p>
+        <a href="/skills/">View Skills</a>
+    </div>
+
+    <div class="card">
+        <h2>➕ Add New Skill</h2>
+        <p>Share your talent with the community.</p>
+        <a href="/add-skill/">Add Skill</a>
+    </div>
+
+    <div class="card">
+        <h2>🤝 Exchange Requests</h2>
+        <p>Manage incoming exchange requests.</p>
+        <a href="/requests/">View Requests</a>
+    </div>
+
+    <div class="card">
+        <h2>👤 My Profile</h2>
+        <p>Update your profile information.</p>
+        <a href="/edit-profile/">Edit Profile</a>
+    </div>
+
+    <div class="card">
+        <h2>🔔 Notifications</h2>
+        <p>You have new exchange requests.</p>
+        <a href="/notifications/">View Notifications</a>
+    </div>
+
+    <div class="card">
+    <h2>🤖 AI Match</h2>
+    <p>See users who can teach what you want to learn</p>
+    <a href="{% url 'ai_match' %}">View Matches</a>
+</div>
+
+</div>
+
+    <script>
+
+    const darkBtn = document.getElementById("darkModeBtn");
+
+    darkBtn.onclick = function(){
+
+        document.body.classList.toggle("dark-mode");
+
+        if(document.body.classList.contains("dark-mode")){
+            darkBtn.innerHTML = "☀️";
+        }
+
+        else{
+            darkBtn.innerHTML = "🌙";
+        }
+
+    }
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Session - SkillSwap BD</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:'Poppins',sans-serif;
+        }
+        body{
+            background:linear-gradient(135deg,#eef2ff,#f8fafc);
+            min-height:100vh;
+            display:flex;justify-content:center;
+            align-items:center;
+            padding:40px;
+        }
+        .container{
+            width:100%;
+            max-width:700px;
+            background:white;
+            padding:40px;
+            border-radius:25px;
+            box-shadow:0 10px 30px rgba(0,0,0,0.1);
+        }
+        h1{
+            text-align:center;
+            margin-bottom:30px;
+            font-size:38px;
+            color:#0f172a;
+        }
+        form{
+            display:flex;
+            flex-direction:column;
+            gap:20px;
+        }
+
+        label{
+            font-weight:600;
+            margin-bottom:8px;
+            color:#111827;
+        }
+        input, select, textarea{
+            adding:15px;
+            border:1px solid #ccc;
+            border-radius:12px;
+            font-size:16px;
+            outline:none;
+        }
+        textarea{
+            resize:none;
+            height:100px;
+        }
+        button{
+            padding:16px;
+            background:#2563eb;
+            color:white;
+            border:none;
+            border-radius:12px;
+            font-size:18px;
+            font-weight:600;
+            cursor:pointer;
+            transition:0.3s;
+        }
+
+        button:hover{
+            background:#1d4ed8;transform:translateY(-2px);
+        }
+        .back-link{
+            text-align:center;
+            margin-top:20px;
+        }
+        .back-link a{
+            text-decoration:none;
+            color:#2563eb;
+            font-weight:600;
+        }
+        .back-link a:hover{
+            text-decoration:underline;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>📅 Create Session</h1>
+
+        <form method="POST">
+            {% csrf_token %}
+
+            <!-- Select Accepted Request -->
+            <div class="form-group">
+                <label for="request">Select Accepted Request</label>
+                <select name="request" id="request" required>
+                    {% for req in accepted_requests %}
+                        <option value="{{ req.id }}">
+                            {{ req.skill.title }} - From: {{ req.sender.username }}
+                        </option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <!-- Teacher -->
+            <div class="form-group">
+                <label for="teacher">Teacher</label>
+                <select name="teacher" id="teacher" required>
+                    {% for teacher in teachers %}
+                        <option value="{{ teacher.id }}">{{ teacher.username }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <!-- Learner -->
+            <div class="form-group">
+                <label for="learner">Learner</label>
+                <select name="learner" id="learner" required>
+                    {% for learner in learners %}
+                        <option value="{{ learner.id }}">{{ learner.username }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <!-- Date -->
+            <div class="form-group">
+                <label for="session_date">Date</label>
+                <input type="date" name="session_date" id="session_date" required>
+            </div>
+
+            <!-- Time -->
+            <div class="form-group">
+                <label for="session_time">Time</label>
+                <input type="time" name="session_time" id="session_time" required>
+            </div>
+
+            <!-- Meeting Link -->
+            <div class="form-group">
+                <label for="meeting_link">Meeting Link (Optional)</label>
+                <input type="url" name="meeting_link" id="meeting_link" placeholder="https://zoom.us/...">
+            </div>
+
+            <!-- Additional Notes -->
+            <div class="form-group">
+                <label for="notes">Additional Notes</label>
+                <textarea name="notes" id="notes" placeholder="Any instructions or notes..."></textarea>
+            </div>
+
+            <button type="submit">Create Session </button>
+        </form>
+
+        <div class="back-link">
+            <a href="/requests/">← Back to Requests</a>
+        </div>
+
+    </div>
+
+</body>
+</html>

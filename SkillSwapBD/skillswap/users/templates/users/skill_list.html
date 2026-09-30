@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SkillSwap BD - Skills</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- CSS -->
+    <style>
+
+
+
+        /* SEARCH */
+
+.search-container{
+    width:90%;
+    margin:auto;
+    margin-bottom:40px;
+}
+
+.search-container form{
+    display:flex;
+    gap:15px;
+}
+
+.search-box{
+    background:white;
+    padding:12px;
+    border-radius:22px;
+    box-shadow:0 8px 25px rgba(0,0,0,0.05);
+}
+
+.search-container input{
+    flex:1;
+    padding:16px;
+    border:none;
+    border-radius:12px;
+    font-size:16px;
+    box-shadow:none;
+}
+
+.search-container button{
+    background:#2563eb;
+    color:white;
+    border:none;
+    padding:16px 30px;
+    border-radius:12px;
+    cursor:pointer;
+    font-weight:600;
+}
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:'Poppins', sans-serif;
+        }
+
+        body{
+            background:linear-gradient(135deg, #eef2ff, #f8fafc);
+        }
+
+        /* NAVBAR */
+
+        .navbar{
+            background:rgba(255,255,255,0.7);
+            backdrop-filter:blur(12px);
+            border-bottom:1px solid rgba(255,255,255,0.2);
+            box-shadow:0 4px 20px rgba(0,0,0,0.05);
+            padding:20px 80px;
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            position:sticky;
+            top:0;
+            z-index:100;
+        }
+
+        .logo{
+            font-size:32px;
+            font-weight:700;
+            color:#2563eb;
+        }
+
+        .nav-links a{
+            text-decoration:none;
+            margin-left:20px;
+            color:#333;
+            font-weight:500;
+            transition:0.3s;
+        }
+
+        .nav-links a:hover{
+            color:#2563eb;
+        }
+
+        /* HEADER */
+
+        .header{
+            text-align:center;
+            padding:60px 20px;
+        }
+
+        .header h1{
+            font-size:50px;
+            color:#111827;
+            margin-bottom:15px;
+        }
+
+        .header p{
+            font-size:18px;
+            color:#6b7280;
+        }
+
+        /* CARD SECTION */
+
+        .skills-container{
+            width:90%;
+            margin:auto;
+            display:grid;
+            grid-template-columns:repeat(auto-fit, minmax(320px,1fr));
+            gap:28px;
+            padding-bottom:80px;
+        }
+
+        .skill-card{
+            background:white;
+            border-radius:24px;
+            padding:28px;
+            box-shadow:0 10px 30px rgba(0,0,0,0.08);
+            transition:0.3s;
+            position:relative;
+            overflow:hidden;
+            display:flex;
+            flex-direction:column;
+            justify-content:space-between;
+            min-height:430px;
+            border-top:4px solid #2563eb;
+        }
+
+        .skill-card:hover{
+            transform:translateY(-8px);
+            box-shadow:0 18px 40px rgba(37,99,235,0.15);
+        }
+
+        .category{
+            display:inline-block;
+            background:#dbeafe;
+            color:#2563eb;
+            padding:8px 16px;
+            border-radius:30px;
+            font-size:13px;
+            font-weight:600;
+            margin-bottom:20px;
+        }
+
+        .skill-card h2{
+            font-size:28px;
+            color:#111827;
+            margin-bottom:15px;
+        }
+
+        .description{
+            color:#6b7280;
+            line-height:1.7;
+            margin-bottom:25px;
+        }
+
+        .user{
+            display:flex;
+            align-items:center;
+            margin-bottom:25px;
+        }
+
+        .avatar{
+            width:55px;
+            height:55px;
+            border-radius:50%;
+            object-fit:cover;
+            margin-right:15px;
+            border:2px solid #2563eb;
+}
+
+        .username{
+            font-size:18px;
+            font-weight:600;
+            color:#111827;
+        }
+
+        .user-header{
+            display:flex;
+            align-items:center;
+            gap:14px;
+            margin-top:25px;
+            margin-bottom:20px;
+        }
+
+
+        /* FOOTER */
+
+        footer{
+            background:linear-gradient(to right,#0f172a,#1e293b);
+            color:white;
+            text-align:center;
+            padding:30px;
+            margin-top:50px;
+            font-size:15px;
+        }
+
+        /* FILTERS */
+
+.filters{
+    width:90%;
+    margin:auto;
+    margin-bottom:40px;
+}
+
+.filters a{
+    text-decoration:none;
+    background:white;
+    padding:12px 22px;
+    border-radius:30px;
+    margin-right:10px;
+    color:#2563eb;
+    font-weight:600;
+    box-shadow:0 5px 20px rgba(0,0,0,0.08);
+    transition:0.3s;
+}
+
+.filters a:hover{
+    background:linear-gradient(to right,#2563eb,#3b82f6);
+    color:white;
+    transform:translateY(-3px);
+}
+
+.like-count{
+    margin-top:15px;
+    font-size:16px;
+    font-weight:600;
+    color:#ec4899;
+}
+
+.action-buttons{
+    display:flex;
+    gap:12px;
+    margin-top:10px;
+    flex-wrap:wrap;
+}
+
+.action-buttons .btn{
+    text-decoration:none;
+    padding:12px 18px;
+    border-radius:12px;
+    color:white;
+    font-size:14px;
+    font-weight:600;
+    transition:0.3s;
+}
+
+.action-buttons .btn:hover{
+    transform:translateY(-3px);
+    box-shadow:0 10px 20px rgba(0,0,0,0.12);
+}
+
+.request-btn{ 
+    background:linear-gradient(to right,#2563eb,#3b82f6);
+}
+
+.chat-btn{
+    background:linear-gradient(to right,#10b981,#059669);
+}
+
+.like-btn{
+    background:linear-gradient(to right,#ec4899,#db2777);
+}
+
+.follow-btn{
+    text-decoration:none;
+    background:#eff6ff;
+    color:#2563eb;
+    padding:10px 16px;
+    border-radius:12px;
+    font-size:14px;
+    font-weight:600;
+    transition:0.3s;
+    display:inline-block;
+    margin-top:8px;
+}
+
+.follow-btn:hover{
+    background:#2563eb;
+    color:white;
+}
+
+.admin-actions{
+    margin-top:18px;
+}
+
+    </style>
+
+</head>
+<body>
+
+    <!-- NAVBAR -->
+
+    <div class="navbar">
+
+        <div class="logo">
+            SkillSwap BD
+        </div>
+
+        <div class="nav-links">
+            <a href="/">Home</a>
+            <a href="/dashboard/">Dashboard</a>
+            <a href="/notifications/">Notifications 🔔</a>
+            <a href="/logout/">Logout</a>
+        </div>
+
+    </div>
+
+    <!-- HEADER -->
+
+    <div class="header">
+
+        <!-- SEARCH BAR -->
+
+<div class="search-container">
+
+    <form method="GET" class="search-box">
+
+        <input 
+            type="text"
+            name="q"
+            placeholder="Search skills..."
+        >
+
+       
+
+        <button type="submit">
+            Search
+        </button>
+
+    </form>
+
+    <!-- CATEGORY FILTER -->
+
+<div class="filters">
+
+    <a href="/skills/?category=Programming">
+        Programming
+    </a>
+
+    <a href="/skills/?category=Design">
+        Design
+    </a>
+
+    <a href="/skills/?category=Marketing">
+        Marketing
+    </a>
+
+    <a href="/skills/?category=Business">
+        Business
+    </a>
+
+</div>
+
+</div>
+
+        <h1>Explore Skills</h1>
+
+        <p>
+            Learn, Teach and Exchange Skills with Amazing People
+        </p>
+
+    </div>
+
+    <!-- SKILL CARDS -->
+
+    <div class="skills-container">
+
+        {% for skill in skills %}
+
+        <div class="skill-card">
+
+            <span class="category">
+                {{ skill.category }}
+            </span>
+
+            <h2>
+                {{ skill.title }}
+            </h2>
+
+            <p class="description">
+                {{ skill.description }}
+            </p>
+
+            <div class="user-header">
+
+    <img 
+        src="{{ skill.user.profile.profile_image.url }}"
+        class="avatar"
+    >
+
+    <div>
+
+        <a href="{% url 'view_profile' skill.user.id %}">{{ skill.user.username }}</a>
+
+        <p style="color:#64748b;font-size:14px;">
+            Skill Mentor
+        </p>
+
+    </div>
+
+</div>
+
+<a href="{% url 'follow_user' skill.user.id %}" class="follow-btn">
+    ➕ Follow
+</a>
+
+           <div class="action-buttons">
+
+    <a href="{% url 'send_request' skill.id %}" class="btn request-btn">
+        Send Request
+    </a>
+
+    <a href="/chat/{{ skill.user.id }}/" class="btn chat-btn">
+        Chat
+    </a>
+
+    <a href="{% url 'like_skill' skill.id %}" class="btn like-btn">
+        Like
+    </a>
+
+</div>
+
+<p class="like-count">
+    ❤️ {{ skill.likes.count }} Likes
+</p>
+
+
+    <div class="action-buttons admin-actions">
+
+    <a href="{% url 'edit_skill' skill.id %}" class="btn request-btn">
+        ✏️ Edit
+    </a>
+
+    <a href="{% url 'delete_skill' skill.id %}" class="btn like-btn">
+        🗑 Delete
+    </a>
+
+</div>
+
+        </div>
+
+        {% endfor %}
+
+   
+
+
+    </div>
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        © 2026 SkillSwap BD | Built with Django 🚀
+
+    </footer>
+
+</body>
+</html>

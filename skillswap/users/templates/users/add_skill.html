@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add Skill</title>
+</head>
+
+<body>
+
+    <h1>Add Your Skill</h1>
+
+    <form method="POST">
+
+        {% csrf_token %}
+
+        {{ form.as_p }}
+
+        <button type="submit">
+            Add Skill
+        </button>
+
+    </form>
+
+</body>
+</html>

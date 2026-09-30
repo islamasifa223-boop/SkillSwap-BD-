@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Send Request</title>
+</head>
+
+<body>
+
+    <h1>
+        Send Request for {{ skill.title }}
+    </h1>
+
+    <form method="POST">
+
+        {% csrf_token %}
+
+        {{ form.as_p }}
+
+        <button type="submit">
+            Send Request
+        </button>
+
+    </form>
+
+</body>
+</html>

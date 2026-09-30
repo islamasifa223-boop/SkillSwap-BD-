@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Sessions</title>
+</head>
+<body>
+
+<h1>My Sessions</h1>
+
+{% for session in sessions %}
+
+    <div style="border:1px solid #ccc; padding:15px; margin:10px;">
+
+        <h3>{{ session.exchange_request.skill.title }}</h3>
+
+        <p>Teacher: {{ session.teacher.username }}</p>
+        <p>Learner: {{ session.learner.username }}</p>
+        <p>Date: {{ session.session_date }}</p>
+        <p>Time: {{ session.session_time }}</p>
+        <p>Status: {{ session.status }}</p>
+
+        {% if session.meeting_link %}
+            <a href="{{ session.meeting_link }}" target="_blank">
+                Join Video Session
+            </a>
+
+            <a href="{% url 'add_review' session.id %}">
+    ⭐ Add Review</a>
+        {% endif %}
+
+    </div>
+
+{% empty %}
+
+    <p>No sessions yet.</p>
+
+{% endfor %}
+
+</body>
+</html>

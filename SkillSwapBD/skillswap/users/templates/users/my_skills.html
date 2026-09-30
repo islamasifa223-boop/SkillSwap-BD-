@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Skills - SkillSwap BD</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:'Poppins',sans-serif;
+        }
+
+        body{
+            background:linear-gradient(135deg,#eef2ff,#f8fafc);
+            min-height:100vh;
+        }
+
+        .navbar{
+            background:rgba(255,255,255,0.75);
+            backdrop-filter:blur(12px);
+            padding:20px 8%;
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            box-shadow:0 4px 20px rgba(0,0,0,0.06);
+            position:sticky;
+            top:0;
+            z-index:100;
+        }
+
+        .logo{
+            font-size:32px;
+            font-weight:700;
+            color:#2563eb;
+        }
+
+        .nav-links a{
+            text-decoration:none;
+            margin-left:20px;
+            color:#334155;
+            font-weight:500;
+        }
+
+        .nav-links a:hover{
+            color:#2563eb;
+        }
+
+        .header{
+            text-align:center;
+            padding:70px 20px 40px;
+        }
+
+        .header h1{
+            font-size:52px;
+            color:#0f172a;
+            margin-bottom:12px;
+        }
+
+        .header p{
+            color:#64748b;
+            font-size:18px;
+        }
+
+        .top-actions{
+            width:90%;
+            margin:0 auto 35px;
+            display:flex;
+            justify-content:flex-end;
+        }
+
+        .add-btn{
+            text-decoration:none;
+            background:linear-gradient(to right,#2563eb,#3b82f6);
+            color:white;
+            padding:14px 26px;
+            border-radius:14px;
+            font-weight:600;
+            box-shadow:0 10px 25px rgba(37,99,235,0.25);
+            transition:0.3s;
+        }
+
+        .add-btn:hover{
+            transform:translateY(-4px);
+        }
+
+        .skills-container{
+            width:90%;
+            margin:auto;
+            display:grid;
+            grid-template-columns:repeat(auto-fit,minmax(330px,1fr));
+            gap:28px;
+            padding-bottom:80px;
+        }
+
+        .skill-card{
+            background:white;
+            border-radius:24px;
+            padding:30px;
+            box-shadow:0 10px 30px rgba(0,0,0,0.08);
+            border-top:4px solid #2563eb;
+            transition:0.3s;
+            min-height:300px;
+            display:flex;
+            flex-direction:column;
+            justify-content:space-between;
+        }
+
+        .skill-card:hover{
+            transform:translateY(-8px);
+            box-shadow:0 18px 40px rgba(37,99,235,0.15);
+        }
+
+        .category{
+            display:inline-block;
+            background:#dbeafe;
+            color:#2563eb;
+            padding:8px 16px;
+            border-radius:30px;
+            font-size:13px;
+            font-weight:600;
+            margin-bottom:18px;
+        }
+
+        .skill-card h2{
+            font-size:28px;
+            color:#0f172a;
+            margin-bottom:14px;
+        }
+
+        .skill-type{
+            color:#7c3aed;
+            font-weight:600;
+            margin-bottom:12px;
+        }
+
+        .description{
+            color:#64748b;
+            line-height:1.7;
+            margin-bottom:25px;
+        }
+
+        .action-buttons{
+            display:flex;
+            gap:12px;
+            flex-wrap:wrap;
+        }
+
+        .btn{
+            text-decoration:none;
+            color:white;
+            padding:12px 20px;
+            border-radius:12px;
+            font-size:14px;
+            font-weight:600;
+            transition:0.3s;
+        }
+
+        .edit-btn{
+            background:linear-gradient(to right,#2563eb,#3b82f6);
+        }
+
+        .delete-btn{
+            background:linear-gradient(to right,#ef4444,#dc2626);
+        }
+
+        .btn:hover{
+            transform:translateY(-3px);
+        }
+
+        .empty-box{
+            width:90%;
+            margin:80px auto;
+            text-align:center;
+            background:white;
+            padding:60px 30px;
+            border-radius:24px;
+            box-shadow:0 10px 30px rgba(0,0,0,0.08);
+        }
+
+        .empty-box h2{
+            font-size:34px;
+            color:#0f172a;
+            margin-bottom:15px;
+        }
+
+        .empty-box p{
+            color:#64748b;
+            margin-bottom:30px;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <div class="navbar">
+
+        <div class="logo">
+            SkillSwap BD
+        </div>
+
+        <div class="nav-links">
+            <a href="/dashboard/">Dashboard</a>
+            <a href="/skills/">Explore Skills</a>
+            <a href="/add-skill/">Add Skill</a>
+            <a href="/logout/">Logout</a>
+        </div>
+
+    </div>
+
+    <div class="header">
+
+        <h1>📖 My Skills</h1>
+
+        <p>
+            Manage the skills you can teach and skills you want to learn
+        </p>
+
+    </div>
+
+    <div class="top-actions">
+
+        <a href="/add-skill/" class="add-btn">
+            ➕ Add New Skill
+        </a>
+
+    </div>
+
+    {% if skills %}
+
+    <div class="skills-container">
+
+        {% for skill in skills %}
+
+        <div class="skill-card">
+
+            <div>
+
+                <span class="category">
+                    {{ skill.category }}
+                </span>
+
+                <h2>
+                    {{ skill.title }}
+                </h2>
+
+                <div class="skill-type">
+                    {{ skill.skill_type }}
+                </div>
+
+                <p class="description">
+                    {{ skill.description }}
+                </p>
+
+            </div>
+
+            <div class="action-buttons">
+
+                <a href="{% url 'edit_skill' skill.id %}" class="btn edit-btn">
+                    ✏️ Edit
+                </a>
+
+                <a href="{% url 'delete_skill' skill.id %}" class="btn delete-btn">
+                    🗑 Delete
+                </a>
+
+            </div>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+    {% else %}
+
+    <div class="empty-box">
+
+        <h2>No Skills Added Yet</h2>
+
+        <p>
+            Start by adding your first skill and grow your SkillSwap profile.
+        </p>
+
+        <a href="/add-skill/" class="add-btn">
+            ➕ Add Your First Skill
+        </a>
+
+    </div>
+
+    {% endif %}
+
+</body>
+</html>

@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Skill - SkillSwap BD</title>
+
+    <!-- GOOGLE FONT -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:'Poppins',sans-serif;
+        }
+
+        body{
+            min-height:100vh;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            padding:40px 20px;
+            background:linear-gradient(135deg,#2563eb,#4f46e5,#7c3aed);
+        }
+
+        .container{
+            width:100%;
+            max-width:750px;
+        }
+
+        .card{
+            background:rgba(255,255,255,0.12);
+            backdrop-filter:blur(18px);
+            border:1px solid rgba(255,255,255,0.15);
+            padding:50px;
+            border-radius:32px;
+            box-shadow:0 20px 50px rgba(0,0,0,0.2);
+            color:white;
+        }
+
+        .card h1{
+            text-align:center;
+            margin-bottom:45px;
+            font-size:52px;
+            font-weight:700;
+            letter-spacing:-1px;
+        }
+
+        .form-group{
+            margin-bottom:25px;
+        }
+
+        label{
+            display:block;
+            margin-bottom:10px;
+            font-size:16px;
+            font-weight:500;
+        }
+
+        input,
+        textarea,
+        select{
+             width:100%;
+             padding:18px 20px;
+             border:none;
+             border-radius:18px;
+             outline:none;
+             font-size:16px;
+             background:rgba(255,255,255,0.15);
+             color:white;
+             transition:0.3s;
+             backdrop-filter:blur(10px);
+        }
+
+        textarea{
+            resize:none;
+            height:140px;
+        }
+
+        input::placeholder,
+        textarea::placeholder{
+            color:#e5e7eb;
+        }
+
+        select option{
+            color:black;
+        }
+
+        input:focus,
+        textarea:focus,
+        select:focus{
+            border:1px solid rgba(255,255,255,0.4);
+            box-shadow:
+            0 0 0 4px rgba(255,255,255,0.08);
+        }
+
+        .btn{
+            width:100%;
+            padding:18px;
+            border:none;
+            border-radius:18px;
+            background:white;
+            color:#2563eb;
+            font-size:18px;
+            font-weight:700;
+            cursor:pointer;
+            transition:0.3s;
+            box-shadow:
+            0 10px 25px rgba(0,0,0,0.15);
+        }
+
+        .btn:hover{
+            transform:translateY(-4px);
+            box-shadow:
+            0 20px 40px rgba(0,0,0,0.2);
+            background:#f8fafc;
+        }
+
+        .back{
+            text-align:center;
+            margin-top:20px;
+        }
+
+        .back a{
+            color:white;
+            text-decoration:none;
+            font-size:15px;
+        }
+
+        .back a:hover{
+            text-decoration:underline;
+        }
+
+    </style>
+
+</head>
+<body>
+
+    <div class="container">
+
+        <div class="card">
+
+            <h1>➕ Add New Skill</h1>
+
+            <form method="POST">
+
+                {% csrf_token %}
+
+                <div class="form-group">
+
+                    <label>Skill Title</label>
+
+                    <input 
+                        type="text"
+                        name="title"
+                        placeholder="Enter your skill"
+                        required
+                    >
+
+                </div>
+
+                <div class="form-group">
+
+                    <label>Category</label>
+
+                    <input 
+                        type="text"
+                        name="category"
+                        placeholder="Programming / Design / Marketing"
+                        required
+                    >
+
+                </div>
+
+                <div class="form-group">
+
+                    <label>Skill Type</label>
+
+                    <select name="skill_type">
+
+                        <option value="Teach">
+                            Skill I Can Teach
+                        </option>
+
+                        <option value="Learn">
+                            Skill I Want To Learn
+                        </option>
+
+                    </select>
+
+                </div>
+
+                <div class="form-group">
+
+                    <label>Description</label>
+
+                    <textarea 
+                        name="description"
+                        placeholder="Write skill details..."
+                    ></textarea>
+
+                </div>
+
+                <div class="form-group">
+                <label>Experience Level</label>
+                <select name="experience_level" required>
+                    <option value="beginner">Beginner</option>
+                    <option value="intermediate">Intermediate</option>
+                    <option value="advanced">Advanced</option>
+                    <option value="expert">Expert</option>
+                </select>
+            </div>
+
+                <button type="submit" class="btn">
+                    Add Skill 
+                </button>
+
+            </form>
+
+            <div class="back">
+
+                <a href="/dashboard/">
+                    ← Back To Dashboard
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</body>
+</html>

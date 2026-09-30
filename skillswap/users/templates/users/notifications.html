@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Notifications 🔔</title>
+</head>
+<body>
+
+<h1>Notifications 🔔</h1>
+
+{% for note in notifications %}
+
+    <div style="border:1px solid gray; padding:15px; margin:10px;">
+        {{ note.message }}
+    </div>
+
+{% empty %}
+
+    <p>No notifications yet.</p>
+
+{% endfor %}
+
+<a href="/dashboard/">
+    ← Back to Dashboard
+</a>
+
+</body>
+</html>
